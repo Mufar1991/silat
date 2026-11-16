@@ -1,0 +1,230 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+:root.light {
+  color-scheme: light;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-950 text-slate-100 font-sans antialiased;
+  min-height: 100vh;
+  overscroll-behavior-y: none;
+}
+
+/* App background */
+.app-bg {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(37, 164, 255, 0.18), transparent 55%),
+    radial-gradient(900px 500px at 90% 10%, rgba(11, 135, 240, 0.10), transparent 60%),
+    linear-gradient(180deg, #070b18 0%, #05070f 100%);
+  transition: background 0.4s ease;
+}
+
+:root.light .app-bg {
+  background:
+    radial-gradient(1200px 600px at 50% -10%, rgba(37, 164, 255, 0.10), transparent 55%),
+    linear-gradient(180deg, #f4f6fb 0%, #e9edf5 100%);
+}
+
+/* Light theme overrides — remap glass & text so every page/component adapts */
+:root.light body {
+  @apply bg-slate-100 text-slate-800;
+}
+:root.light .app-bg {
+  color: #1e293b;
+}
+:root.light .glass,
+:root.light .glass-strong,
+:root.light .glass-soft {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 4px 20px rgba(15, 23, 42, 0.08);
+}
+:root.light .text-white,
+:root.light .text-slate-100 {
+  color: #0f172a;
+}
+:root.light .text-slate-300,
+:root.light .text-slate-400 {
+  color: #475569;
+}
+:root.light .text-slate-500 {
+  color: #64748b;
+}
+:root.light .border-white\/10,
+:root.light .border-white\/15 {
+  border-color: rgba(15, 23, 42, 0.1);
+}
+:root.light .bg-white\/\[0\.06\],
+:root.light .bg-white\/\[0\.05\],
+:root.light .bg-white\/\[0\.04\] {
+  background-color: rgba(15, 23, 42, 0.04);
+}
+:root.light .btn-ghost {
+  background: rgba(15, 23, 42, 0.04);
+  color: #1e293b;
+  border-color: rgba(15, 23, 42, 0.1);
+}
+:root.light .btn-ghost:hover {
+  background: rgba(15, 23, 42, 0.08);
+}
+:root.light .btn-gold {
+  color: #78350f;
+}
+:root.light .btn-gold:hover {
+  background: #f6c453;
+}
+:root.light .input {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(15, 23, 42, 0.15);
+  color: #0f172a;
+}
+:root.light .input::placeholder {
+  color: #94a3b8;
+}
+:root.light header.sticky {
+  background: rgba(244, 246, 251, 0.85);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+:root.light nav.fixed,
+:root.light aside.fixed {
+  background: rgba(255, 255, 255, 0.9);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+:root.light ::-webkit-scrollbar-thumb {
+  background: rgba(15, 23, 42, 0.18);
+}
+:root.light .transition,
+:root.light .transition-all,
+:root.light .transition-colors {
+  transition-property: all;
+}
+:root.light * {
+  transition-timing-function: ease;
+}
+:root.light body,
+:root.light .glass,
+:root.light .glass-soft,
+:root.light .glass-strong,
+:root.light .btn,
+:root.light .input,
+:root.light header,
+:root.light nav,
+:root.light aside,
+:root.light .chip,
+:root.light .badge {
+  transition: background-color 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+}
+
+/* Glassmorphism */
+@layer components {
+  .glass {
+    @apply rounded-2xl border border-white/10 bg-white/[0.06] backdrop-blur-xl shadow-glass;
+  }
+  .glass-strong {
+    @apply rounded-2xl border border-white/15 bg-white/[0.09] backdrop-blur-2xl shadow-glass;
+  }
+  .glass-soft {
+    @apply rounded-2xl border border-white/[0.07] bg-white/[0.04] backdrop-blur-md;
+  }
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold transition-all duration-200 active:scale-95 disabled:opacity-50 disabled:active:scale-100;
+  }
+  .btn-primary {
+    @apply btn bg-accent-500 text-white hover:bg-accent-400 shadow-glow;
+  }
+  .btn-ghost {
+    @apply btn bg-white/[0.06] text-slate-100 hover:bg-white/[0.12] border border-white/10;
+  }
+  .btn-gold {
+    @apply btn bg-gold-500 text-ink-950 hover:bg-gold-400;
+  }
+  .input {
+    @apply w-full rounded-xl border border-white/10 bg-ink-900/60 px-4 py-3 text-sm text-white placeholder:text-slate-500 outline-none transition focus:border-accent-400 focus:ring-2 focus:ring-accent-500/30;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-400;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold;
+  }
+  .section-title {
+    @apply font-display text-xl font-bold tracking-tight text-white;
+  }
+  .card-hover {
+    @apply transition-all duration-300 hover:-translate-y-0.5 hover:border-accent-400/40;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(37, 164, 255, 0.4);
+}
+
+/* Safe area for mobile */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top);
+}
+
+/* Range slider styling */
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #25a4ff;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(37, 164, 255, 0.6);
+  border: 3px solid #0a0f1f;
+}
+input[type='range']::-moz-range-thumb {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #25a4ff;
+  cursor: pointer;
+  border: 3px solid #0a0f1f;
+}
+
+:root.light input[type='range']::-webkit-slider-thumb {
+  border-color: #ffffff;
+}
+:root.light input[type='range'] {
+  background: rgba(15, 23, 42, 0.12);
+}
